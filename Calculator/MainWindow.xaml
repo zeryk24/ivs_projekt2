@@ -32,14 +32,13 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-
 		<TextBox x:Name="numberTextBox" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2" MaxLength="7" Padding="5"
 				 FontWeight="ExtraBlack" FontSize="50" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" 
 				 BorderThickness="0" Background="#BB111111" Foreground="White" TextChanged="numberTextBox_TextChanged"/>
 
 		<DockPanel x:Name="topBar" Background="Black" Grid.ColumnSpan="4" MouseDown="topBar_MouseDown"/>
 		<Button x:Name="closeButton" Grid.Column="3" Grid.Row="0" Margin="25,2" Click="closeButton_Click" Style="{StaticResource BetterButton}"/>
-		<Button x:Name="pointButton" Content="." Grid.Column="2" Grid.Row="9" Margin="7,5" />
+		<Button x:Name="pointButton" Content="." Grid.Column="2" Grid.Row="9" Margin="7,5"/>
 		<Button x:Name="zeroButton" Content="0" Grid.Column="0" Grid.Row="9" Margin="7,5"/>
 		<Button x:Name="xx" Content="xx" Grid.Column="3" Grid.Row="6" Margin="7,5" />
 		<Button x:Name="oneButton" Content="1" Grid.Column="0" Grid.Row="8" Margin="7,5" />
