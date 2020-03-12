@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,8 +21,6 @@ namespace Calculator
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private string validChars = "0123456789+-*/√";
-		private string operations = "+-*/";
 		private bool darkMode;
 		public bool DarkMode
 		{
@@ -44,30 +43,6 @@ namespace Calculator
 			App.Current.Resources["MainColor"] = (Color)ColorConverter.ConvertFromString("#FFA500");
 			App.Current.Resources["Foreground"] = Brushes.White;
 			FocusManager.SetFocusedElement(this, numberTextBox);
-		}
-
-		private void numberTextBox_TextChanged(object sender, TextChangedEventArgs e)
-		{
-			if (numberTextBox.Text.Length > 0)
-			{
-				Validation();
-			}
-		}
-
-		private void Validation()
-		{
-			if (!validChars.Contains(numberTextBox.Text.Substring(numberTextBox.Text.Length - 1).ToCharArray()[0]))
-			{
-				numberTextBox.Text = numberTextBox.Text.Substring(0, numberTextBox.Text.Length - 1);
-				numberTextBox.CaretIndex = numberTextBox.Text.Length;
-				MessageBox.Show("Nice Try", "Invalid");
-			}
-			else if (operations.Contains(numberTextBox.Text.Substring(numberTextBox.Text.Length - 1).ToCharArray()[0]) && operations.Contains(numberTextBox.Text.Substring(numberTextBox.Text.Length - 2).ToCharArray()[0]))
-			{
-				numberTextBox.Text = numberTextBox.Text.Substring(0, numberTextBox.Text.Length - 1);
-				numberTextBox.CaretIndex = numberTextBox.Text.Length;
-				MessageBox.Show("Nice Try", "Invalid");
-			}
 		}
 
 		private void settingsButton_Click(object sender, RoutedEventArgs e)
@@ -95,6 +70,12 @@ namespace Calculator
 		{
 			if (e.ChangedButton == MouseButton.Left)
 				Application.Current.MainWindow.DragMove();
+		}
+
+		private void numberTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+		{
+			Regex regex = new Regex(@"(?:[0-9])|(?:[\.\+\-\*\/\√])");
+			e.Handled = !regex.IsMatch(e.Text);
 		}
 	}
 }

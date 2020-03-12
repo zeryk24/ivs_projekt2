@@ -34,7 +34,7 @@
 
 		<TextBox x:Name="numberTextBox" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2" MaxLength="7" Padding="5"
 				 FontWeight="ExtraBlack" FontSize="50" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" 
-				 BorderThickness="0" Background="#BB111111" Foreground="White" TextChanged="numberTextBox_TextChanged"/>
+				 BorderThickness="0" Background="#BB111111" Foreground="White" PreviewTextInput="numberTextBox_PreviewTextInput" />
 
 		<DockPanel x:Name="topBar" Background="Black" Grid.ColumnSpan="4" MouseDown="topBar_MouseDown"/>
 		<Button x:Name="closeButton" Grid.Column="3" Grid.Row="0" Margin="25,2" Click="closeButton_Click" Style="{StaticResource BetterButton}"/>
