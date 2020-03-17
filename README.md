@@ -20,18 +20,23 @@ Erik:
 
 Honza:
 - [ ] Parser
+- [ ] Testy pro parser
+- [ ] Uživatelská a programová dokumentace
+
+Michal:
+- [ ] Matematická knihovna
+- [ ] Testy pro knihovnu
+- [ ] Makefile 
+
+Kuba:
+- [ ] Profiling
+- [ ] Instalačka
 
 Nerozděleno:
-- [ ] Matematická knihovna
-- [ ] Parser
-- [ ] Uživatelská a programová dokumentace
 - [x] Verzování (git)
 - [ ] **Nasdílet repozitář někomu z ivs**
-- [ ] Testy pro knihovnu
-- [ ] Testy pro parser
-- [ ] Makefile a instalačka
 - [ ] Screen jak debugujem
-- [ ] Profiling
+
 
 
 
