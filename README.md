@@ -48,17 +48,28 @@ co dál???
 
 
 ### String format pro parser
-* Sčítání, násobení apod.
+#### Sčítání, násobení apod.
 
-        "-5+3*-10-2"
-* Funkce s dvěma parametry:
+        "-5+3*-10-2" //jde
+
+        "+-5" //nejde?
+
+#### Funkce s dvěma parametry:
+
+Nemuže v nich být výraz, pouze číslo, odmocnina nemůže být záporná
 
         "sqrt(5,2)+pow(4,7)" //odmocnina z 5 + 4 na sedmou
-* Faktorial:
+
+        "sqrt(5+2,5)" //nejde
+        "sqrt(-5,2)" //nejde
+
+#### Faktorial:
+za faktoriálem musí být rovnou číslo
 
         "!5+2"
 
         "!-5+2" //- nepujde zadat
+        "!*5" //- nepujde zadat
 
 
 
