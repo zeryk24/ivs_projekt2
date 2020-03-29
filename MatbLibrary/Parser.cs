@@ -12,7 +12,7 @@ namespace MatbLibrary
         /// </summary>
         class BinaryOperation
         {
-            public BinaryOperation(string _regex, Func<int, int, int> _func)
+            public BinaryOperation(string _regex, Func<double, double, double> _func)
             {
                 regex = new Regex(_regex);
                 func = _func;
@@ -20,7 +20,7 @@ namespace MatbLibrary
             //regex patern of operation
             public Regex regex;
             //function for the operation from math library
-            public Func<int, int, int> func;
+            public Func<double, double, double> func;
         }
         //All operations supported
         enum Operations
@@ -36,7 +36,7 @@ namespace MatbLibrary
         static Parser()
         {
             //Patter for double number
-            string digit_regex = @"(\-?\d+(?:\.?\d*)?)";
+            string digit_regex = @"((?:\-|\+)?\d+(?:\.?\d*)?)";
 
             binary_operations = new Dictionary<Operations, BinaryOperation>();
 
@@ -65,6 +65,9 @@ namespace MatbLibrary
             input = SolveBinaryOperation(input, Operations.Div);
             input = SolveBinaryOperation(input, Operations.Plus);
             input = SolveBinaryOperation(input, Operations.Minus);
+
+            input = input.Replace("--", "+");
+
             return double.Parse(input);
         }
         /// <summary>
@@ -91,26 +94,40 @@ namespace MatbLibrary
             foreach (Match match in matches)
             {
                 //regex pattern is written so x and y is always in group 1 and 2
-                int x = int.Parse(match.Groups[1].Value);
-                int y = int.Parse(match.Groups[2].Value);
+                double x = double.Parse(match.Groups[1].Value);
+                double y = double.Parse(match.Groups[2].Value);
 
                 //uses function from the math library to calculate result
-                int result = binary_operations[oper].func(x, y);
+                double result = binary_operations[oper].func(x, y);
 
-                input = input.Replace(match.Value, result.ToString());
+                string replacement = result.ToString();
+                //this is to fix issue with calculations like 
+                //3-5*-2, which would result doubleo 300, instead of correct 3+10
+                if (result >= 0) replacement = "+" + replacement;
+
+                input = input.Replace(match.Value, replacement);
             }
             return input;
         }
 
+        /// <summary>
+        /// Solves all brackets using Solve() method and replaces them with result 
+        /// </summary>
+        /// <param name="input">Input string</param>
+        /// <returns>string with all brackets replaced with Solve() output</returns>
         static string SolveBrackets(string input)
         {
             Regex regex = new Regex(@"\(((?:[0-9]|\+|\-|\*|\%)*)\)");
-            MatchCollection matches = regex.Matches(input);
-            foreach (Match match in matches)
+            MatchCollection matches;
+            do
             {
-                int result = (int)Solve(match.Groups[1].Value);
-                input = input.Replace(match.Value, result.ToString());
-            }
+                matches = regex.Matches(input);
+                foreach (Match match in matches)
+                {
+                    double result = (double)Solve(match.Groups[1].Value);
+                    input = input.Replace(match.Value, result.ToString());
+                }
+            } while (matches.Count != 0);
             return input;
         }
 
