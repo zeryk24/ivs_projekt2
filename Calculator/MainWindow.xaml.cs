@@ -74,8 +74,35 @@ namespace Calculator
 
 		private void numberTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
 		{
-			Regex regex = new Regex(@"(?:[0-9])|(?:[\.\+\-\*\/\√])");
+			Regex regex = new Regex(@"(?:[0-9])|(?:[\(\)\.\+\-\*\/\√])");
 			e.Handled = !regex.IsMatch(e.Text);
+		}
+
+		private void number_Click(object sender, RoutedEventArgs e)
+		{
+			int caretPosition = numberTextBox.CaretIndex+1;
+			string insert = (sender as Button).Content.ToString();
+			numberTextBox.Text = numberTextBox.Text.Insert(numberTextBox.CaretIndex, insert);
+			FocusManager.SetFocusedElement(this, numberTextBox);
+			numberTextBox.CaretIndex = caretPosition;
+		}
+
+		private void deleteAllButton_Click(object sender, RoutedEventArgs e)
+		{
+			numberTextBox.Text = "";
+			FocusManager.SetFocusedElement(this, numberTextBox);
+		}
+
+		private void deleteButton_Click(object sender, RoutedEventArgs e)
+		{
+			int caretPosition = numberTextBox.CaretIndex - 1;
+			if (caretPosition >= 0)
+				numberTextBox.Text = numberTextBox.Text.Remove(caretPosition, 1);
+			else
+				caretPosition = 0;
+			FocusManager.SetFocusedElement(this, numberTextBox);
+			numberTextBox.CaretIndex = caretPosition;
+
 		}
 	}
 }
