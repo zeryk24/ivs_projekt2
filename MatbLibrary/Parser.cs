@@ -60,6 +60,7 @@ namespace MatbLibrary
         /// <returns>Returns result of the given calculation</returns>
         public static double Solve(string input)
         {
+            input = input.Replace("--", "+");
             input = SolveBrackets(input);
             input = SolveBinaryOperation(input, Operations.Mul);
             input = SolveBinaryOperation(input, Operations.Div);
@@ -67,7 +68,6 @@ namespace MatbLibrary
             input = SolveBinaryOperation(input, Operations.Minus);
 
             input = input.Replace("--", "+");
-
             return double.Parse(input);
         }
         /// <summary>
@@ -107,6 +107,7 @@ namespace MatbLibrary
 
                 input = input.Replace(match.Value, replacement);
             }
+            input = input.Replace("--", "+");
             return input;
         }
 
@@ -127,6 +128,7 @@ namespace MatbLibrary
                     double result = (double)Solve(match.Groups[1].Value);
                     input = input.Replace(match.Value, result.ToString());
                 }
+                input = input.Replace("--", "+");
             } while (matches.Count != 0);
             return input;
         }

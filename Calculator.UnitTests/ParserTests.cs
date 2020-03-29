@@ -41,8 +41,8 @@ namespace Calculator.UnitTests
             Assert.AreEqual(Parser.Solve("5+3"), 8);
             Assert.AreEqual(Parser.Solve("5-3"), 2);
             Assert.AreEqual(Parser.Solve("-5-3"), -8);
-
-           //Neimplementovano: Assert.AreEqual(Parser.Solve("!5"), 120);
+            Assert.AreEqual(Parser.Solve("--5+3"), 8);
+            //Neimplementovano: Assert.AreEqual(Parser.Solve("!5"), 120);
 
             Assert.AreEqual(Parser.Solve("5*3"), 15);
             Assert.AreEqual(Parser.Solve("5*-3"), -15);
