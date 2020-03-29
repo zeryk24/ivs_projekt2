@@ -77,7 +77,15 @@ namespace MatbLibrary
         /// <returns>Retruns true if string is valide, false if not</returns>
         public static bool Validate(string input)
         {
-            //TODO
+            try
+            {
+                Solve(input);
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
             return true;
         }
 
@@ -90,24 +98,28 @@ namespace MatbLibrary
         static string SolveBinaryOperation(string input, Operations oper)
         {
 
-            MatchCollection matches = binary_operations[oper].regex.Matches(input);
-            foreach (Match match in matches)
+            MatchCollection matches;
+            do
             {
-                //regex pattern is written so x and y is always in group 1 and 2
-                double x = double.Parse(match.Groups[1].Value);
-                double y = double.Parse(match.Groups[2].Value);
+                matches = binary_operations[oper].regex.Matches(input);
+                foreach (Match match in matches)
+                {
+                    //regex pattern is written so x and y is always in group 1 and 2
+                    double x = double.Parse(match.Groups[1].Value);
+                    double y = double.Parse(match.Groups[2].Value);
 
-                //uses function from the math library to calculate result
-                double result = binary_operations[oper].func(x, y);
+                    //uses function from the math library to calculate result
+                    double result = binary_operations[oper].func(x, y);
 
-                string replacement = result.ToString();
-                //this is to fix issue with calculations like 
-                //3-5*-2, which would result doubleo 300, instead of correct 3+10
-                if (result >= 0) replacement = "+" + replacement;
+                    string replacement = result.ToString();
+                    //this is to fix issue with calculations like 
+                    //3-5*-2, which would result doubleo 300, instead of correct 3+10
+                    if (result >= 0) replacement = "+" + replacement;
 
-                input = input.Replace(match.Value, replacement);
-            }
-            input = input.Replace("--", "+");
+                    input = input.Replace(match.Value, replacement);
+                }
+                input = input.Replace("--", "+");
+            } while (matches.Count != 0);
             return input;
         }
 

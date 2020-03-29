@@ -11,9 +11,9 @@ namespace Calculator.UnitTests
         [TestMethod]
         public void Validation_RightInput()
         {
-            /* Neimplementováno
             Assert.IsTrue(Parser.Validate("-5+3*-10-2"));
             Assert.IsTrue(Parser.Validate("(-5+3)*-10-2"));
+           /* Neimplementovano
             Assert.IsTrue(Parser.Validate("(-5+3)*-10√2"));
             Assert.IsTrue(Parser.Validate("(-5+3)*-2!"));
             Assert.IsTrue(Parser.Validate("(-5+3)*-10^2"));
@@ -23,7 +23,7 @@ namespace Calculator.UnitTests
         [TestMethod]
         public void Validation_WrongInput()
         {
-            /* Neimplementováno
+   
             Assert.IsFalse(Parser.Validate("(-5)!"));
             Assert.IsFalse(Parser.Validate("5√-2"));
             Assert.IsFalse(Parser.Validate("5*!"));
@@ -31,7 +31,7 @@ namespace Calculator.UnitTests
             Assert.IsFalse(Parser.Validate("5^"));
             Assert.IsFalse(Parser.Validate("^5"));
             Assert.IsFalse(Parser.Validate("5-^5"));
-            */
+    
         }
 
         [TestMethod]
@@ -65,6 +65,8 @@ namespace Calculator.UnitTests
             Assert.AreEqual(Parser.Solve("3-5*2"), -7);
             Assert.AreEqual(Parser.Solve("3-5*-2"), 13);
             Assert.AreEqual(Parser.Solve("(3-5)*2"), -4);
+            Assert.AreEqual(Parser.Solve("-5+3*-10-2"), -37);
+            
 
             // neimplementovano
             //Assert.AreEqual(Parser.Solve("!5*2"), 240);
