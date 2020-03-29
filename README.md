@@ -39,37 +39,36 @@ Nerozděleno:
 
 ### Funkce co se budou podporovat:
 * +-
-* */
-* ! - faktorial
-* sqrt(x,y) - odmocnina
-* pow(x,y) - mocnina
+* *%
+* x! - faktorial
+* x√y - odmocnina
+* x^y - mocnina
+* xln - přirozenej logaritmus
 
-co dál???
-
+* závorky, priority operaci
 
 ### String format pro parser
 #### Sčítání, násobení apod.
 
         "-5+3*-10-2" //jde
-
-        "+-5" //nejde?
+        "2+-5" //je
+        "--5+2" //výsledek bude 7
 
 #### Funkce s dvěma parametry:
 
 Nemuže v nich být výraz, pouze číslo, odmocnina nemůže být záporná
 
-        "sqrt(5,2)+pow(4,7)" //odmocnina z 5 + 4 na sedmou
+        "5^2+4√7" //odmocnina z 5 + 4 na sedmou
+        "(5+3)^2+4√7" //jde
 
-        "sqrt(5+2,5)" //nejde
-        "sqrt(-5,2)" //nejde
-
+        "-5√2)" //nejde
 #### Faktorial:
-za faktoriálem musí být rovnou číslo
+před faktoriálem musí být rovnou výraz
 
-        "!5+2"
+        "5!+2"
 
-        "!-5+2" //- nepujde zadat
-        "!*5" //- nepujde zadat
+        "5+!" //- nepujde zadat
+        "5*!" //- nepujde zadat
 
 
 
