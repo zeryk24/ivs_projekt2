@@ -32,26 +32,28 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<TextBox x:Name="numberTextBox" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2" MaxLength="7" Padding="5"
+		<TextBox x:Name="numberTextBox" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2" MaxLength="50" Padding="5"
 				 FontWeight="ExtraBlack" FontSize="50" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" 
 				 BorderThickness="0" Background="#BB111111" Foreground="White" PreviewTextInput="numberTextBox_PreviewTextInput" />
 
 		<DockPanel x:Name="topBar" Background="Black" Grid.ColumnSpan="4" MouseDown="topBar_MouseDown"/>
-		<Button x:Name="closeButton" Grid.Column="3" Grid.Row="0" Margin="25,2" Click="closeButton_Click" Style="{StaticResource BetterButton}"/>
+		<Button x:Name="closeButton" Grid.Column="3" Grid.Row="0" Margin="25,2" Click="closeButton_Click" Width="25" Style="{StaticResource BetterButton}"/>
+		<Button x:Name="zeroButton" Content="0" Grid.Column="0" Grid.Row="9" Margin="7,5" Click="number_Click"/>
 		<Button x:Name="pointButton" Content="." Grid.Column="2" Grid.Row="9" Margin="7,5"/>
-		<Button x:Name="zeroButton" Content="0" Grid.Column="0" Grid.Row="9" Margin="7,5"/>
-		<Button x:Name="xx" Content="xx" Grid.Column="3" Grid.Row="6" Margin="7,5" />
-		<Button x:Name="oneButton" Content="1" Grid.Column="0" Grid.Row="8" Margin="7,5" />
-		<Button x:Name="twoButton" Content="2" Grid.Column="1" Grid.Row="8" Margin="7,5" />
-		<Button x:Name="threeButton" Content="3" Grid.Column="2" Grid.Row="8" Margin="7,5" />
+		<Button x:Name="leftBracket" Content="(" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Left" Margin="7,5" Width="30"/>
+		<Button x:Name="rightBracket" Content=")" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Right" Margin="7,5" Width="30"/>
+		<Button x:Name="ln" Content="xx" Grid.Column="3" Grid.Row="6" Margin="7,5"/>
+		<Button x:Name="oneButton" Content="1" Grid.Column="0" Grid.Row="8" Margin="7,5" Click="number_Click"/>
+		<Button x:Name="twoButton" Content="2" Grid.Column="1" Grid.Row="8" Margin="7,5" Click="number_Click"/>
+		<Button x:Name="threeButton" Content="3" Grid.Column="2" Grid.Row="8" Margin="7,5" Click="number_Click"/>
 		<Button x:Name="equalsButton" Content="=" Grid.Column="3" Grid.Row="7" Grid.RowSpan="3" Margin="7,5" Style="{StaticResource BetterButton}"/>
-		<Button x:Name="fourButton" Content="4" Grid.Column="0" Grid.Row="7" Margin="7,5" />
-		<Button x:Name="fiveButton" Content="5" Grid.Column="1" Grid.Row="7" Margin="7,5" />
-		<Button x:Name="sixButton" Content="6" Grid.Column="2" Grid.Row="7" Margin="7,5" />
+		<Button x:Name="fourButton" Content="4" Grid.Column="0" Grid.Row="7" Margin="7,5" Click="number_Click"/>
+		<Button x:Name="fiveButton" Content="5" Grid.Column="1" Grid.Row="7" Margin="7,5" Click="number_Click"/>
+		<Button x:Name="sixButton" Content="6" Grid.Column="2" Grid.Row="7" Margin="7,5" Click="number_Click"/>
 		<Button x:Name="multiplicationButton" Content="*" Grid.Column="1" Grid.Row="5" Margin="7,5" />
-		<Button x:Name="sevenButton" Content="7" Grid.Column="0" Grid.Row="6" Margin="7,5" />
-		<Button x:Name="eightButton" Content="8" Grid.Column="1" Grid.Row="6" Margin="7,5" />
-		<Button x:Name="nineButton" Content="9" Grid.Column="2" Grid.Row="6" Margin="7,5" />
+		<Button x:Name="sevenButton" Content="7" Grid.Column="0" Grid.Row="6" Margin="7,5" Click="number_Click"/>
+		<Button x:Name="eightButton" Content="8" Grid.Column="1" Grid.Row="6" Margin="7,5" Click="number_Click"/>
+		<Button x:Name="nineButton" Content="9" Grid.Column="2" Grid.Row="6" Margin="7,5" Click="number_Click"/>
 		<Button x:Name="divisionButton" Content="/" Grid.Column="2" Grid.Row="5" Margin="7,5" />
 		<Button x:Name="plusButton" Content="+" Grid.Column="0" Grid.Row="5" Margin="7,5"/>
 		<Button x:Name="minusButton" Content="-" Grid.Column="4" Grid.Row="5" Margin="7,5"/>
@@ -59,8 +61,8 @@
 		<Button x:Name="negationButton" Content="+/-" Grid.Column="1" Grid.Row="4" Margin="7,5" />
 		<Button x:Name="sqrtButton" Content="√" Grid.Column="2" Grid.Row="4" Margin="7,5" />
 		<Button x:Name="powerButton" Content="^" Grid.Column="3" Grid.Row="4" Margin="7,5" />
-		<Button x:Name="deleteButton" Content="C" Grid.Column="0" Grid.Row="3" Margin="7,5" FontSize="13" Style="{StaticResource BetterButton}"/>
-		<Button x:Name="deleteAllButton" Content="Ce" Grid.Column="3" Grid.Row="3" Margin="7,5" FontSize="13" Style="{StaticResource BetterButton}"/>
+		<Button x:Name="deleteButton" Content="C" Grid.Column="0" Grid.Row="3" Margin="7,5" FontSize="13" Style="{StaticResource BetterButton}" Click="deleteButton_Click"/>
+		<Button x:Name="deleteAllButton" Content="Ce" Grid.Column="3" Grid.Row="3" Margin="7,5" FontSize="13" Style="{StaticResource BetterButton}" Click="deleteAllButton_Click"/>
 		<Button x:Name="settingsButton" Content="Settings" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Margin="7,5" FontSize="12" Click="settingsButton_Click" Style="{StaticResource BetterButton}"/>
 	</Grid>
 </Window>
