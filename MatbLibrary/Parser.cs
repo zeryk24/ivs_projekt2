@@ -57,7 +57,7 @@ namespace MatbLibrary
         /// Parses input string to separete calculations and solves them using the Math library
         /// </summary>
         /// <param name="input">Validated string to calculate</param>
-        /// <returns>Returns result of the given calculation</returns>
+        /// <returns>Returns result of the given calculation or NaN if it fails</returns>
         public static double Solve(string input)
         {
             input = input.Replace("--", "+");
@@ -68,7 +68,11 @@ namespace MatbLibrary
             input = SolveBinaryOperation(input, Operations.Minus);
 
             input = input.Replace("--", "+");
-            return double.Parse(input);
+
+            double result;
+            if (!double.TryParse(input, out result))
+                return double.NaN;
+            else return result;
         }
         /// <summary>
         /// Validates if input string is in corrent format
@@ -77,16 +81,10 @@ namespace MatbLibrary
         /// <returns>Retruns true if string is valide, false if not</returns>
         public static bool Validate(string input)
         {
-            try
-            {
-                Solve(input);
-            }
-            catch (Exception)
-            {
-
+            //takhle to pak nebude :)
+            if (double.IsNaN(Solve(input)))
                 return false;
-            }
-            return true;
+            else return true;
         }
 
         /// <summary>
