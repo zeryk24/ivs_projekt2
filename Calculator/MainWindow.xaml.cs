@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MatbLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -103,6 +104,30 @@ namespace Calculator
 			FocusManager.SetFocusedElement(this, numberTextBox);
 			numberTextBox.CaretIndex = caretPosition;
 
+		}
+
+		private void equalsButton_Click(object sender, RoutedEventArgs e)
+		{
+			string problem = numberTextBox.Text;
+			//Parser parser = new Parser();
+			double result = Parser.Solve(problem);
+			numberTextBox.Text = double.IsNaN(result) ? "FUKING ERROR BRUH!!" : result.ToString();
+		}
+
+		private void numberTextBox_KeyDown(object sender, KeyEventArgs e)
+		{
+			switch (e.Key)
+			{
+                case Key.Enter:
+					MessageBox.Show("yup");
+                    break;
+				case Key.I:
+					MessageBox.Show("otevře settings");
+					break;
+				case Key.C:
+					numberTextBox.Text = "";
+					break;
+			}
 		}
 	}
 }
