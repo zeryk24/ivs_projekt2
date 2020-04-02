@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -47,7 +48,7 @@ namespace MatbLibrary
             binary_operations[Operations.Mul] =
                 new BinaryOperation(digit_regex + @"\*" + digit_regex, Functions.Mul);
             binary_operations[Operations.Div] =
-                new BinaryOperation(digit_regex + @"\%" + digit_regex, Functions.Div);
+                new BinaryOperation(digit_regex + @"\/" + digit_regex, Functions.Div);
         }
 
       
@@ -103,8 +104,8 @@ namespace MatbLibrary
                 foreach (Match match in matches)
                 {
                     //regex pattern is written so x and y is always in group 1 and 2
-                    double x = double.Parse(match.Groups[1].Value);
-                    double y = double.Parse(match.Groups[2].Value);
+                    double x = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
+                    double y = double.Parse(match.Groups[2].Value, CultureInfo.InvariantCulture);
 
                     //uses function from the math library to calculate result
                     double result = binary_operations[oper].func(x, y);
@@ -128,7 +129,7 @@ namespace MatbLibrary
         /// <returns>string with all brackets replaced with Solve() output</returns>
         static string SolveBrackets(string input)
         {
-            Regex regex = new Regex(@"\(((?:[0-9]|\+|\-|\*|\%)*)\)");
+            Regex regex = new Regex(@"\(((?:[0-9]|\+|\-|\*|\/)*)\)");
             MatchCollection matches;
             do
             {

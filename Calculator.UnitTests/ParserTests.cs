@@ -47,9 +47,11 @@ namespace Calculator.UnitTests
             Assert.AreEqual(Parser.Solve("5*3"), 15);
             Assert.AreEqual(Parser.Solve("5*-3"), -15);
             Assert.AreEqual(Parser.Solve("-5*-3"), 15);
-            Assert.AreEqual(Parser.Solve("10%2"), 5);
-            Assert.AreEqual(Parser.Solve("10%-2"), -5);
+            Assert.AreEqual(Parser.Solve("10/2"), 5);
+            Assert.AreEqual(Parser.Solve("10/-2"), -5);
 
+            Assert.AreEqual(Parser.Solve("5.2+3"), 8.2);
+            Assert.AreEqual(Parser.Solve("1/2"), 0.5);
             /* Neimplementovano
             Assert.AreEqual(Parser.Solve("2^2"), 4);
             Assert.AreEqual(Parser.Solve("-(2^2)"), -4);
