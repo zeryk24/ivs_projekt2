@@ -1,3 +1,11 @@
+#### tým:
+    \_(*_*)_/\_(*_*)_/\_(*_*)_/\_(*_*)_/
+#### členové:
+* xbacae00
+* xskvar09
+* xzavad18
+* xnovot2a 
+
 ### git setup easy návod
 buď odsato: https://git-scm.com/ nebo takhle na linuxu:
 
