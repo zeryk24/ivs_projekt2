@@ -48,7 +48,9 @@ namespace Calculator
 
 		private void settingsButton_Click(object sender, RoutedEventArgs e)
 		{
-			DarkMode = !DarkMode;
+			Settings settings = new Settings(this);
+			settings.ShowDialog();
+			//DarkMode = !DarkMode;
 		}
 
 		private void setMode(string mainColor, string minorColor, string background, Brush foreground, string numberBackground, Brush numberForeground, Brush topbar)
@@ -111,7 +113,7 @@ namespace Calculator
 			string problem = numberTextBox.Text;
 			//Parser parser = new Parser();
 			double result = Parser.Solve(problem);
-			numberTextBox.Text = double.IsNaN(result) ? "FUKING ERROR BRUH!!" : result.ToString();
+			numberTextBox.Text = double.IsNaN(result) ? "ERROR BRUH!!" : result.ToString();
 		}
 
 		private void numberTextBox_KeyDown(object sender, KeyEventArgs e)

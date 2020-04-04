@@ -65,14 +65,4 @@
 		<Button x:Name="deleteAllButton" Content="Ce" Grid.Column="3" Grid.Row="3" Margin="7,5" FontSize="13" Style="{StaticResource BetterButton}" Click="deleteAllButton_Click"/>
 		<Button x:Name="settingsButton" Content="Settings" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Margin="7,5" FontSize="12" Click="settingsButton_Click" Style="{StaticResource BetterButton}"/>
 	</Grid>
-
-	<Window.Triggers>
-		<EventTrigger RoutedEvent="Loaded">
-			<BeginStoryboard>
-				<Storyboard>
-					<DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="00:00:2"/>
-				</Storyboard>
-			</BeginStoryboard>
-		</EventTrigger>
-	</Window.Triggers>
 </Window>
