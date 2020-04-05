@@ -94,7 +94,7 @@ namespace Calculator.UnitTests
         [TestMethod]
         public void Exp_NegativeBase()
         {
-            Assert.AreEqual(Math.Abs(Functions.Exp(-5, 6)), (Functions.Exp(5, 6)));
+            Assert.AreEqual((Functions.Exp(-5, 6)), (Functions.Exp(5, 6)));
         }
         [TestMethod]
         public void Exp_NegativeExp()
@@ -114,7 +114,7 @@ namespace Calculator.UnitTests
         [TestMethod]
         public void Root_ZeroBase()
         {
-            Assert.AreEqual(0, Functions.Root(0, 4));
+            Assert.IsTrue(Math.Abs(0 - Functions.Root(0, 4)) < 0.00000001);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -129,15 +129,11 @@ namespace Calculator.UnitTests
         {
             Functions.Root(-5, 2);
         }
-        [TestMethod]
-        public void Root_Exp_Equal()
-        {
-            Assert.AreEqual(Functions.Exp(125, 1/3.0), Functions.Root(125,3));
-        }
+        
         [TestMethod]
         public void NatLog_BasicInput()
         {
-            Assert.AreEqual(1, Functions.NatLog(Math.E));
+            Assert.IsTrue((Math.Abs(1 - Functions.NatLog(Math.E)) < 0.00000001));
         }
         [TestMethod]
         public void NatLog_BasicInput2()
