@@ -20,10 +20,9 @@ namespace Calculator
 	/// </summary>
 	public partial class Settings : Window
 	{
-		public Settings(MainWindow parent)
+		public Settings()
 		{
 			InitializeComponent();
-			parent.DarkMode = !parent.DarkMode;
 		}
 
 		private void topBar_MouseDown(object sender, MouseButtonEventArgs e)

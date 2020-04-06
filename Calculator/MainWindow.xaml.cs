@@ -22,7 +22,7 @@ namespace Calculator
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private bool darkMode;
+		private bool darkMode = true;
 		public bool DarkMode
 		{
 			get { return darkMode; }
@@ -30,9 +30,9 @@ namespace Calculator
 			{
 				darkMode = value;
 				if (darkMode)
-					setMode("#00CC00", "#80FF04", "#CCF8F8F8", Brushes.Black, "#AAB0B0B0", Brushes.Black, Brushes.White);
+					setMode(Mode.DarkMode);
 				else
-					setMode("#FFA500", "#ff0000", "#CC000000", Brushes.White, "#BB111111", Brushes.White, Brushes.Black);
+					setMode(Mode.LightMode);
 			}
 		}
 
@@ -40,28 +40,25 @@ namespace Calculator
 		public MainWindow()
 		{
 			InitializeComponent();
-			App.Current.Resources["MinorColor"] = (Color)ColorConverter.ConvertFromString("#ff0000");
-			App.Current.Resources["MainColor"] = (Color)ColorConverter.ConvertFromString("#FFA500");
-			App.Current.Resources["Foreground"] = Brushes.White;
+			setMode(Mode.DarkMode);
 			FocusManager.SetFocusedElement(this, numberTextBox);
 		}
 
 		private void settingsButton_Click(object sender, RoutedEventArgs e)
 		{
-			Settings settings = new Settings(this);
+			Settings settings = new Settings();
 			settings.ShowDialog();
-			//DarkMode = !DarkMode;
 		}
 
-		private void setMode(string mainColor, string minorColor, string background, Brush foreground, string numberBackground, Brush numberForeground, Brush topbar)
+		private void setMode(Mode mode)
 		{
-			App.Current.Resources["MainColor"] = (Color)ColorConverter.ConvertFromString(mainColor);
-			App.Current.Resources["MinorColor"] = (Color)ColorConverter.ConvertFromString(minorColor);
-			this.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(background);
-			App.Current.Resources["Foreground"] = foreground;
-			numberTextBox.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(numberBackground);
-			numberTextBox.Foreground = numberForeground;
-			topBar.Background = topbar;
+			App.Current.Resources["MainColor"] = (Color)ColorConverter.ConvertFromString(mode.MainColor);
+			App.Current.Resources["MinorColor"] = (Color)ColorConverter.ConvertFromString(mode.MinorColor);
+			this.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(mode.Background);
+			App.Current.Resources["Foreground"] = mode.Foreground;
+			numberTextBox.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(mode.NumberBackground);
+			numberTextBox.Foreground = mode.NumberForeground;
+			topBar.Background = mode.Topbar;
 		}
 
 		private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -130,6 +127,12 @@ namespace Calculator
 					numberTextBox.Text = "";
 					break;
 			}
+		}
+
+		private void modeButton_Click(object sender, RoutedEventArgs e)
+		{
+			DarkMode = !DarkMode;
+			modeButtonText.Text = darkMode ? "Dark" : "Light";
 		}
 	}
 }

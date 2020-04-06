@@ -37,16 +37,25 @@
 				 BorderThickness="0" Background="#BB111111" Foreground="White" PreviewTextInput="numberTextBox_PreviewTextInput" KeyDown="numberTextBox_KeyDown"/>
 
 		<DockPanel x:Name="topBar" Background="Black" Grid.ColumnSpan="4" MouseDown="topBar_MouseDown"/>
-		<Button x:Name="closeButton" Grid.Column="3" Grid.Row="0" Margin="25,2" Click="closeButton_Click" Width="25" Style="{StaticResource BetterButton}"/>
+		<Button x:Name="closeButton" Grid.Column="3" Grid.Row="0" MaxHeight="15" Margin="25,2" Click="closeButton_Click" Width="25" Style="{StaticResource BetterButton}"/>
+		<Button x:Name="modeButton" Grid.Column="0" Grid.Row="0" Click="modeButton_Click">
+			<Viewbox>
+				<TextBlock x:Name="modeButtonText" FontWeight="ExtraBold">Dark mode</TextBlock>
+			</Viewbox>
+		</Button>
 		<Button x:Name="zeroButton" Content="0" Grid.Column="0" Grid.Row="9" Margin="7,5" Click="number_Click"/>
 		<Button x:Name="pointButton" Content="." Grid.Column="2" Grid.Row="9" Margin="7,5"/>
 		<Button x:Name="leftBracket" Content="(" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Left" Margin="7,5" Width="30"/>
 		<Button x:Name="rightBracket" Content=")" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Right" Margin="7,5" Width="30"/>
-		<Button x:Name="ln" Content="xx" Grid.Column="3" Grid.Row="6" Margin="7,5"/>
+		<Button x:Name="ln" Content="ln" Grid.Column="3" Grid.Row="6" Margin="7,5"/>
 		<Button x:Name="oneButton" Content="1" Grid.Column="0" Grid.Row="8" Margin="7,5" Click="number_Click"/>
 		<Button x:Name="twoButton" Content="2" Grid.Column="1" Grid.Row="8" Margin="7,5" Click="number_Click"/>
 		<Button x:Name="threeButton" Content="3" Grid.Column="2" Grid.Row="8" Margin="7,5" Click="number_Click"/>
-		<Button x:Name="equalsButton" Content="=" Grid.Column="3" Grid.Row="7" Grid.RowSpan="3" Margin="7,5" Style="{StaticResource BetterButton}" Click="equalsButton_Click"/>
+		<Button x:Name="equalsButton" Grid.Column="3" Grid.Row="7" Grid.RowSpan="3" Margin="7,5" Style="{StaticResource BetterButton}" Click="equalsButton_Click">
+			<Viewbox>
+				<TextBlock Margin="15,20" FontWeight="Bold">=</TextBlock>
+			</Viewbox>
+		</Button>
 		<Button x:Name="fourButton" Content="4" Grid.Column="0" Grid.Row="7" Margin="7,5" Click="number_Click"/>
 		<Button x:Name="fiveButton" Content="5" Grid.Column="1" Grid.Row="7" Margin="7,5" Click="number_Click"/>
 		<Button x:Name="sixButton" Content="6" Grid.Column="2" Grid.Row="7" Margin="7,5" Click="number_Click"/>
@@ -61,8 +70,20 @@
 		<Button x:Name="negationButton" Content="+/-" Grid.Column="1" Grid.Row="4" Margin="7,5" />
 		<Button x:Name="sqrtButton" Content="√" Grid.Column="2" Grid.Row="4" Margin="7,5" />
 		<Button x:Name="powerButton" Content="^" Grid.Column="3" Grid.Row="4" Margin="7,5" />
-		<Button x:Name="deleteButton" Content="C" Grid.Column="0" Grid.Row="3" Margin="7,5" FontSize="13" Style="{StaticResource BetterButton}" Click="deleteButton_Click"/>
-		<Button x:Name="deleteAllButton" Content="Ce" Grid.Column="3" Grid.Row="3" Margin="7,5" FontSize="13" Style="{StaticResource BetterButton}" Click="deleteAllButton_Click"/>
-		<Button x:Name="settingsButton" Content="Settings" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Margin="7,5" FontSize="12" Click="settingsButton_Click" Style="{StaticResource BetterButton}"/>
+		<Button x:Name="deleteButton" Grid.Column="0" Grid.Row="3" Margin="7,5" FontSize="13" Style="{StaticResource BetterButton}" Click="deleteButton_Click">
+			<Viewbox>
+				<TextBlock Margin="1" FontWeight="Bold">C</TextBlock>
+			</Viewbox>
+		</Button>
+		<Button x:Name="deleteAllButton" Grid.Column="3" Grid.Row="3" Margin="7,5" FontSize="13" Style="{StaticResource BetterButton}" Click="deleteAllButton_Click">
+			<Viewbox>
+				<TextBlock Margin="1" FontWeight="Bold">Ce</TextBlock>
+			</Viewbox>
+		</Button>
+		<Button x:Name="settingsButton" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Margin="7,5" FontSize="12" Click="settingsButton_Click" Style="{StaticResource BetterButton}">
+			<Viewbox>
+				<TextBlock Margin="1" FontWeight="Bold">Help</TextBlock>
+			</Viewbox>
+		</Button>
 	</Grid>
 </Window>

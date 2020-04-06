@@ -12,11 +12,17 @@
         Title="Settings" Height="450" Width="800" Background="#CC000000">
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition/>
-			<RowDefinition Height="30*"/>
+			<RowDefinition Height="5*"/>
+			<RowDefinition Height="20*"/>
+			<RowDefinition Height="75*"/>
 		</Grid.RowDefinitions>
-		<DockPanel x:Name="topBar" Background="Black" Grid.ColumnSpan="4" MouseDown="topBar_MouseDown"/>
-		<Button x:Name="closeButton" Grid.Row="0" HorizontalAlignment="Right" Margin="25,2" Click="closeButton_Click" Width="25" Style="{StaticResource BetterButton}"/>
+		<DockPanel x:Name="topBar" Background="Black" MouseDown="topBar_MouseDown" Margin="0,0,0,0.4"/>
+		<Button x:Name="closeButton" Grid.Row="0" HorizontalAlignment="Right" MaxHeight="15" Margin="0,0,25,0" Click="closeButton_Click" Width="25" Style="{StaticResource BetterButton}"/>
+		<Label Name="helpLabel" Grid.Row="1" HorizontalAlignment="Center">
+			<Viewbox>
+				<TextBlock  FontFamily="Comic Sans MS" FontWeight="ExtraBold" Foreground="White">Help</TextBlock>
+			</Viewbox>
+		</Label>
 	</Grid>
 
 	<Window.Triggers>
