@@ -11,17 +11,31 @@ namespace MatbLibrary
         /// <summary>
         /// Class for handling binary operations like plus, multiply, etc.
         /// </summary>
-        class BinaryOperation
+        class Operation
         {
-            public BinaryOperation(string _regex, Func<double, double, double> _func)
+            public Operation(string _regex, Func<double, double, double> _func)
             {
                 regex = new Regex(_regex);
-                func = _func;
+                binFunc = _func;
+                type = Operation_type.Binary;
             }
+
+            public Operation(string _regex, Func<double, double> _func)
+            {
+                regex = new Regex(_regex);
+                unFunc = _func;
+                type = Operation_type.Unary;
+            }
+
+            public Operation_type type;
+
             //regex patern of operation
             public Regex regex;
             //function for the operation from math library
-            public Func<double, double, double> func;
+            //binary function (two parameters)
+            public Func<double, double, double> binFunc;
+            //unary function (one parametr
+            public Func<double, double> unFunc;
         }
         //All operations supported
         enum Operations
@@ -30,25 +44,43 @@ namespace MatbLibrary
             Minus,
             Mul,
             Div,
+            Pow,
+            Sqrt,
+            Fac,
+            NLog,
         }
-
+        enum Operation_type
+        {
+            Binary,
+            Unary
+        }
         //Dictionary of all binary operations and therir matching object
-        static Dictionary<Operations, BinaryOperation> binary_operations;
+        static Dictionary<Operations, Operation> operation_list;
         static Parser()
         {
             //Patter for double number
             string digit_regex = @"((?:\-|\+)?\d+(?:\.?\d*)?)";
 
-            binary_operations = new Dictionary<Operations, BinaryOperation>();
+            operation_list = new Dictionary<Operations, Operation>();
+            //unary
+            operation_list[Operations.Fac] =
+                new Operation(digit_regex + @"\!", Functions.Fact);
+            operation_list[Operations.NLog] =
+                new Operation(@"ln" + digit_regex, Functions.NatLog);
 
-            binary_operations[Operations.Plus] = 
-                new BinaryOperation(digit_regex + @"\+" + digit_regex, Functions.Add);
-            binary_operations[Operations.Minus] = 
-                new BinaryOperation(digit_regex + @"\-" + digit_regex, Functions.Sub);
-            binary_operations[Operations.Mul] =
-                new BinaryOperation(digit_regex + @"\*" + digit_regex, Functions.Mul);
-            binary_operations[Operations.Div] =
-                new BinaryOperation(digit_regex + @"\/" + digit_regex, Functions.Div);
+            //binary operations
+            operation_list[Operations.Plus] = 
+                new Operation(digit_regex + @"\+" + digit_regex, Functions.Add);
+            operation_list[Operations.Minus] = 
+                new Operation(digit_regex + @"\-" + digit_regex, Functions.Sub);
+            operation_list[Operations.Mul] =
+                new Operation(digit_regex + @"\*" + digit_regex, Functions.Mul);
+            operation_list[Operations.Div] =
+                new Operation(digit_regex + @"\/" + digit_regex, Functions.Div);
+            operation_list[Operations.Pow] =
+                new Operation(digit_regex + @"\^" + digit_regex, Functions.Exp);
+            operation_list[Operations.Sqrt] =
+                new Operation(digit_regex + @"\√" + digit_regex, Functions.Root);
         }
 
       
@@ -63,10 +95,14 @@ namespace MatbLibrary
         {
             input = input.Replace("--", "+");
             input = SolveBrackets(input);
-            input = SolveBinaryOperation(input, Operations.Mul);
-            input = SolveBinaryOperation(input, Operations.Div);
-            input = SolveBinaryOperation(input, Operations.Plus);
-            input = SolveBinaryOperation(input, Operations.Minus);
+            input = SolveOperation(input, Operations.NLog);
+            input = SolveOperation(input, Operations.Fac);
+            input = SolveOperation(input, Operations.Pow);
+            input = SolveOperation(input, Operations.Sqrt);
+            input = SolveOperation(input, Operations.Mul);
+            input = SolveOperation(input, Operations.Div);
+            input = SolveOperation(input, Operations.Plus);
+            input = SolveOperation(input, Operations.Minus);
 
             input = input.Replace("--", "+");
 
@@ -83,7 +119,17 @@ namespace MatbLibrary
         public static bool Validate(string input)
         {
             //takhle to pak nebude :)
-            if (double.IsNaN(Solve(input)))
+            double result;
+            try
+            {
+                result = Solve(input);
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            if (double.IsNaN(result))
                 return false;
             else return true;
         }
@@ -94,22 +140,31 @@ namespace MatbLibrary
         /// <param name="input">Input string</param>
         /// <param name="oper">Operation to be replaced</param>
         /// <returns>string with operation replaced with results</returns>
-        static string SolveBinaryOperation(string input, Operations oper)
+        static string SolveOperation(string input, Operations oper)
         {
 
             MatchCollection matches;
             do
             {
-                matches = binary_operations[oper].regex.Matches(input);
+                matches = operation_list[oper].regex.Matches(input);
                 foreach (Match match in matches)
                 {
-                    //regex pattern is written so x and y is always in group 1 and 2
-                    double x = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
-                    double y = double.Parse(match.Groups[2].Value, CultureInfo.InvariantCulture);
-
-                    //uses function from the math library to calculate result
-                    double result = binary_operations[oper].func(x, y);
-
+                    double result=double.NaN;
+                    if (operation_list[oper].type == Operation_type.Unary)
+                    {
+                        //regex pattern is written so x  group 1
+                        double x = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
+                        //uses function from the math library to calculate result
+                        result = operation_list[oper].unFunc(x);
+                    }
+                    else if (operation_list[oper].type == Operation_type.Binary)
+                    {
+                        //regex pattern is written so x and y is always in group 1 and 2
+                        double x = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
+                        double y = double.Parse(match.Groups[2].Value, CultureInfo.InvariantCulture);
+                        //uses function from the math library to calculate result
+                        result = operation_list[oper].binFunc(x, y);
+                    }
                     string replacement = result.ToString();
                     //this is to fix issue with calculations like 
                     //3-5*-2, which would result doubleo 300, instead of correct 3+10
@@ -121,7 +176,6 @@ namespace MatbLibrary
             } while (matches.Count != 0);
             return input;
         }
-
         /// <summary>
         /// Solves all brackets using Solve() method and replaces them with result 
         /// </summary>
@@ -129,7 +183,7 @@ namespace MatbLibrary
         /// <returns>string with all brackets replaced with Solve() output</returns>
         static string SolveBrackets(string input)
         {
-            Regex regex = new Regex(@"\(((?:[0-9]|\+|\-|\*|\/)*)\)");
+            Regex regex = new Regex(@"\(((?:[0-9]|\+|ln|\!|\-|\√|\^|\*|\/)*)\)");
             MatchCollection matches;
             do
             {
