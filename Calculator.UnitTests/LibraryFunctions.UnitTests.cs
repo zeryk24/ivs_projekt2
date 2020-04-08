@@ -104,30 +104,30 @@ namespace Calculator.UnitTests
         [TestMethod]
         public void Root_BasicInput()
         {
-            Assert.AreEqual(6, Functions.Root(1296, 4));
+            Assert.AreEqual(6, Functions.Root(4, 1296));
         }
         [TestMethod]
         public void Root_BasicInput2()
         {
-            Assert.IsTrue(Math.Abs(1.75256345 - Functions.Root(89, 8)) <= 1.75256345 * 0.00000001);
+            Assert.IsTrue(Math.Abs(1.75256345 - Functions.Root(8, 89)) <= 1.75256345 * 0.00000001);
         }
         [TestMethod]
         public void Root_ZeroBase()
         {
-            Assert.IsTrue(Math.Abs(0 - Functions.Root(0, 4)) < 0.00000001);
+            Assert.IsTrue(Math.Abs(0 - Functions.Root(4, 0)) < 0.00000001);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Root_ZeroDegree()
         {
-            Functions.Root(5, 0);
+            Functions.Root(0, 5);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
 
         public void Root_InvalidInput()
         {
-            Functions.Root(-5, 2);
+            Functions.Root(2, -5);
         }
         
         [TestMethod]

@@ -61,9 +61,11 @@ namespace MatbLibrary
             return sum;
         }
         //nth root algorithm using Newthon's method
+        //x - root degree
+        //y - root base
         public static double Root(double x, double y)
         {
-            if (y == 0 || y % 1 != 0 || (x < 0 && y % 2 == 0))
+            if (x == 0 || x % 1 != 0 || (y < 0 && x % 2 == 0))
                 throw new ArgumentException("Error: invalid argument");
 
             Random rand = new Random();
@@ -72,7 +74,7 @@ namespace MatbLibrary
             double xNext = 0.0;
             while (diff > 1e-12)
             {
-                xNext = ((y - 1.0) * xPrev + x / Functions.Exp(xPrev, y - 1)) / y;
+                xNext = ((x - 1.0) * xPrev + y / Functions.Exp(xPrev, x - 1)) / x;
                 diff = Math.Abs(xNext - xPrev);
                 xPrev = xNext;
             }
