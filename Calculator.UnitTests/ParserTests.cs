@@ -40,7 +40,7 @@ namespace Calculator.UnitTests
         [TestMethod]
         public void SolveOperations()
         {
-            
+            Assert.AreEqual(Parser.Solve("---5"), -5);
             Assert.AreEqual(Parser.Solve("5!"), 120);
             Assert.AreEqual(Parser.Solve("5+3"), 8);
             Assert.AreEqual(Parser.Solve("5-3"), 2);

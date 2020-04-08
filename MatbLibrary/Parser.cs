@@ -93,7 +93,7 @@ namespace MatbLibrary
         /// <returns>Returns result of the given calculation or NaN if it fails</returns>
         public static double Solve(string input)
         {
-            input = input.Replace("--", "+");
+            input = ReplaceSigns(input);
             input = SolveBrackets(input);
             input = SolveOperation(input, Operations.NLog);
             input = SolveOperation(input, Operations.Fac);
@@ -104,7 +104,7 @@ namespace MatbLibrary
             input = SolveOperation(input, Operations.Plus);
             input = SolveOperation(input, Operations.Minus);
 
-            input = input.Replace("--", "+");
+            input = ReplaceSigns(input);
 
             double result;
             if (!double.TryParse(input, out result))
@@ -132,6 +132,21 @@ namespace MatbLibrary
             if (double.IsNaN(result))
                 return false;
             else return true;
+           
+        }
+
+        static string ReplaceSigns (string input)
+        {
+            string replacement = input;
+            do
+            {
+                input = replacement;
+                replacement = replacement.Replace("--", "+");
+                replacement = replacement.Replace("++", "+");
+                replacement = replacement.Replace("-+", "-");
+                replacement = replacement.Replace("+-", "-");
+            } while (replacement != input);
+            return replacement;
         }
 
         /// <summary>
@@ -172,7 +187,7 @@ namespace MatbLibrary
 
                     input = input.Replace(match.Value, replacement);
                 }
-                input = input.Replace("--", "+");
+                input = ReplaceSigns(input);
             } while (matches.Count != 0);
             return input;
         }
@@ -193,7 +208,7 @@ namespace MatbLibrary
                     double result = (double)Solve(match.Groups[1].Value);
                     input = input.Replace(match.Value, result.ToString());
                 }
-                input = input.Replace("--", "+");
+                input = ReplaceSigns(input);
             } while (matches.Count != 0);
             return input;
         }
