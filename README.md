@@ -47,36 +47,26 @@ Nerozděleno:
 
 ### Funkce co se budou podporovat:
 * +-
-* *%
+* */
 * x! - faktorial
 * x√y - odmocnina
 * x^y - mocnina
-* xln - přirozenej logaritmus
+* lnx - přirozenej logaritmus
 
 * závorky, priority operaci
 
 ### String format pro parser
-#### Sčítání, násobení apod.
+    x+y
+    x-y
+    x*y
+    x/y
+    x^y
+    x√y
+    x!
+    lnx
 
-        "-5+3*-10-2" //jde
-        "2+-5" //je
-        "--5+2" //výsledek bude 7
-
-#### Funkce s dvěma parametry:
-
-Nemuže v nich být výraz, pouze číslo, odmocnina nemůže být záporná
-
-        "5^2+4√7" //odmocnina z 5 + 4 na sedmou
-        "(5+3)^2+4√7" //jde
-
-        "-5√2)" //nejde
-#### Faktorial:
-před faktoriálem musí být rovnou výraz
-
-        "5!+2"
-
-        "5+!" //- nepujde zadat
-        "5*!" //- nepujde zadat
+* x a y může být číslo s plus nebo s mínus před ním, nebo závorky s čímkoliv vevnitř
+* do závorek lze dávat další závorky
 
 
 
