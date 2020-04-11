@@ -30,9 +30,9 @@ namespace Calculator
 			{
 				darkMode = value;
 				if (darkMode)
-					setMode(Mode.DarkMode);
+					Setmode(Mode.DarkMode);
 				else
-					setMode(Mode.LightMode);
+					Setmode(Mode.LightMode);
 			}
 		}
 
@@ -40,7 +40,7 @@ namespace Calculator
 		public MainWindow()
 		{
 			InitializeComponent();
-			setMode(Mode.DarkMode);
+			Setmode(Mode.DarkMode);
 			FocusManager.SetFocusedElement(this, numberTextBox);
 		}
 
@@ -50,7 +50,7 @@ namespace Calculator
 			settings.ShowDialog();
 		}
 
-		private void setMode(Mode mode)
+		private void Setmode(Mode mode)
 		{
 			App.Current.Resources["MainColor"] = (Color)ColorConverter.ConvertFromString(mode.MainColor);
 			App.Current.Resources["MinorColor"] = (Color)ColorConverter.ConvertFromString(mode.MinorColor);
@@ -74,15 +74,20 @@ namespace Calculator
 
 		private void numberTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
 		{
-			Regex regex = new Regex(@"(?:[0-9])|(?:[\(\)\.\+\-\*\/\√])");
-			e.Handled = !regex.IsMatch(e.Text);
+			e.Handled = Validate(e.Text);
 		}
 
-		private void number_Click(object sender, RoutedEventArgs e)
+		private bool Validate(string text)
 		{
-			int caretPosition = numberTextBox.CaretIndex+1;
+			Regex regex = new Regex(@"(?:[0-9])|(?:[\(\)\.\+\-\*\/\√])");
+			return regex.IsMatch(text) ? false : true;
+		}
+		private void numberSign_Click(object sender, RoutedEventArgs e)
+		{
+			int caretPosition = numberTextBox.CaretIndex + 1;
 			string insert = (sender as Button).Content.ToString();
-			numberTextBox.Text = numberTextBox.Text.Insert(numberTextBox.CaretIndex, insert);
+			if (!Validate(numberTextBox.Text+insert))
+				numberTextBox.Text = numberTextBox.Text.Insert(numberTextBox.CaretIndex, insert);
 			FocusManager.SetFocusedElement(this, numberTextBox);
 			numberTextBox.CaretIndex = caretPosition;
 		}
@@ -107,10 +112,14 @@ namespace Calculator
 
 		private void equalsButton_Click(object sender, RoutedEventArgs e)
 		{
+			Solve();
+		}
+
+		private void Solve()
+		{
 			string problem = numberTextBox.Text;
-			//Parser parser = new Parser();
 			double result = Parser.Solve(problem);
-			numberTextBox.Text = double.IsNaN(result) ? "ERROR BRUH!!" : result.ToString();
+			numberTextBox.Text = double.IsNaN(result) ? "ERROR" : result.ToString();
 		}
 
 		private void numberTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -118,13 +127,15 @@ namespace Calculator
 			switch (e.Key)
 			{
                 case Key.Enter:
-					MessageBox.Show("yup");
+					Solve();
                     break;
 				case Key.I:
-					MessageBox.Show("otevře settings");
+					Settings settings = new Settings();
+					settings.ShowDialog();
 					break;
 				case Key.C:
-					numberTextBox.Text = "";
+					numberTextBox.Clear();
+					FocusManager.SetFocusedElement(this, numberTextBox);
 					break;
 			}
 		}
@@ -133,6 +144,22 @@ namespace Calculator
 		{
 			DarkMode = !DarkMode;
 			modeButtonText.Text = darkMode ? "Dark" : "Light";
+		}
+
+		private void negationButton_Click(object sender, RoutedEventArgs e)
+		{
+			if(numberTextBox.Text.StartsWith("-(") && numberTextBox.Text.EndsWith(")"))
+			{
+
+			} else
+			{
+
+			}
+		}
+
+		private void sqrtButton_Click(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }
