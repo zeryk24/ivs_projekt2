@@ -5,24 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
+		Name="helpWindow"
 		WindowStyle="None"
 		AllowsTransparency="True"
 		ResizeMode="CanResizeWithGrip"
 		WindowStartupLocation="CenterScreen"
-        Title="Settings" Height="450" Width="800" Background="#CC000000">
+        Title="Settings" Height="500" Width="800" Background="#CC000000">
 	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="5*"/>
-			<RowDefinition Height="20*"/>
-			<RowDefinition Height="75*"/>
+			<RowDefinition Height="18*"/>
+			<RowDefinition Height="10*"/>
+			<RowDefinition Height="7*"/>
+			<RowDefinition Height="55*"/>
+			<RowDefinition Height="5*"/>
 		</Grid.RowDefinitions>
-		<DockPanel x:Name="topBar" Background="Black" MouseDown="topBar_MouseDown" Margin="0,0,0,0.4"/>
-		<Button x:Name="closeButton" Grid.Row="0" HorizontalAlignment="Right" MaxHeight="15" Margin="0,0,25,0" Click="closeButton_Click" Width="25" Style="{StaticResource BetterButton}"/>
-		<Label Name="helpLabel" Grid.Row="1" HorizontalAlignment="Center">
+		<DockPanel x:Name="topBar" Background="Black" MouseDown="topBar_MouseDown" Grid.ColumnSpan="5"/>
+		<Button x:Name="closeButton" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" MaxHeight="15" Margin="0,0,25,0" Click="closeButton_Click" Width="25" Style="{StaticResource BetterButton}"/>
+		<Button x:Name="sqrtButton" Content="√" Grid.Row="2" Grid.Column="0" Margin="25,10" Click="functionButton_Click" Style="{StaticResource BetterButton}"/>
+		<Button x:Name="powerButton" Content="^" Grid.Row="2" Grid.Column="1" Margin="25,10" Style="{StaticResource BetterButton}"/>
+		<Button x:Name="lnButton" Content="ln" Grid.Row="2" Grid.Column="2" Margin="25,10" Style="{StaticResource BetterButton}"/>
+		<Button x:Name="factorialButton" Content="!" Grid.Row="2" Grid.Column="3" Margin="25,10" Style="{StaticResource BetterButton}"/>
+		<Button x:Name="negationButton" Content="+/-" Grid.Row="2" Grid.Column="4" Margin="25,10" Style="{StaticResource BetterButton}"/>
+
+		<Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center">
+			<Viewbox>
+				<TextBlock Name="functionText" FontFamily="Comic Sans MS" FontWeight="ExtraBold" Foreground="White">Natural logaritm</TextBlock>
+			</Viewbox>
+		</Label>
+
+		<Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
 			<Viewbox>
 				<TextBlock  FontFamily="Comic Sans MS" FontWeight="ExtraBold" Foreground="White">Help</TextBlock>
 			</Viewbox>
 		</Label>
+		<Label Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+			<Viewbox>
+				<TextBlock  FontFamily="Comic Sans MS" Foreground="White">Created by Erik Báča, Jan Škvařil, Michal Zavadil, Jakub Novotný 2k20</TextBlock>
+			</Viewbox>
+		</Label>
+
 	</Grid>
 
 	<Window.Triggers>

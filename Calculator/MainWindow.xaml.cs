@@ -69,7 +69,7 @@ namespace Calculator
 		private void topBar_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (e.ChangedButton == MouseButton.Left)
-				Application.Current.MainWindow.DragMove();
+				this.DragMove();
 		}
 
 		private void numberTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
