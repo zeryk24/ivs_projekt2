@@ -27,15 +27,16 @@ namespace Calculator
 
 		private void topBar_MouseDown(object sender, MouseButtonEventArgs e)
 		{
+			
 			if (e.ChangedButton == MouseButton.Left)
-				Application.Current.MainWindow.DragMove();
+				this.DragMove();
 		}
 
 		private void closeButton_Click(object sender, RoutedEventArgs e)
 		{
 			DoubleAnimation closingAnimation = new DoubleAnimation()
 			{
-				From = 500,
+				From = helpWindow.ActualHeight,
 				To = 0,
 				Duration = new Duration(TimeSpan.FromSeconds(1))
 			};
@@ -46,6 +47,11 @@ namespace Calculator
 		private void closingAnimation_Completed(object sender, EventArgs e)
 		{
 			this.Close();
+		}
+
+		private void functionButton_Click(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }
