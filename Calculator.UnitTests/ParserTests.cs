@@ -11,6 +11,7 @@ namespace Calculator.UnitTests
         [TestMethod]
         public void Validation_RightInput()
         {
+            Assert.IsTrue(Parser.Validate("(5/3)*2"));
             Assert.IsTrue(Parser.Validate("-5+3*-10-2"));
             Assert.IsTrue(Parser.Validate("(-5+3)*-10-2"));
 

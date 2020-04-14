@@ -59,7 +59,7 @@ namespace MatbLibrary
         static Parser()
         {
             //Patter for double number
-            string digit_regex = @"((?:\-|\+)?\d+(?:\.?\d*)?)";
+            string digit_regex = @"((?:\-|\+)?\d+(?:(?:\.|\,)?\d*)?)";
 
             operation_list = new Dictionary<Operations, Operation>();
             //unary
@@ -201,14 +201,14 @@ namespace MatbLibrary
         /// <returns>string with all brackets replaced with Solve() output</returns>
         static string SolveBrackets(string input)
         {
-            Regex regex = new Regex(@"\(((?:[0-9]|\+|ln|\!|\-|\√|\^|\*|\/)*)\)");
+            Regex regex = new Regex(@"\(((?:[0-9]|\+|ln|\!|\-|\√|\^|\*|\/|\.|\,)*)\)");
             MatchCollection matches;
             do
             {
                 matches = regex.Matches(input);
                 foreach (Match match in matches)
                 {
-                    double result = (double)Solve(match.Groups[1].Value);
+                    double result = Solve(match.Groups[1].Value);
                     input = input.Replace(match.Value, result.ToString());
                 }
                 input = ReplaceSigns(input);
