@@ -20,9 +20,20 @@ namespace Calculator
 	/// </summary>
 	public partial class Settings : Window
 	{
+		Dictionary<string, HelpContent> helpDictionary = new Dictionary<string, HelpContent>();
 		public Settings()
 		{
 			InitializeComponent();
+			fillHelpDictionary();
+		}
+
+		public void fillHelpDictionary()
+		{
+			helpDictionary.Add("√", HelpContent.Root);
+			helpDictionary.Add("^", HelpContent.Exponentation);
+			helpDictionary.Add("ln", HelpContent.Logarithm);
+			helpDictionary.Add("!", HelpContent.Factorial);
+			helpDictionary.Add("+/-", HelpContent.Negation);
 		}
 
 		private void topBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -51,7 +62,19 @@ namespace Calculator
 
 		private void functionButton_Click(object sender, RoutedEventArgs e)
 		{
+			string caseText = (sender as Button).Content.ToString();
+			HelpContent ActualHelpContent = helpDictionary[caseText];
+			fillLabels(ActualHelpContent);
+		}
 
+		private void fillLabels(HelpContent ActualHelpContent)
+		{
+			titleLabel.Content = ActualHelpContent.Title;
+			descriptionLabel.Content = ActualHelpContent.Description;
+			caseOneLabel.Content = ActualHelpContent.Case[0];
+			caseTwoLabel.Content = ActualHelpContent.Case[1];
+			caseThreeLabel.Content = ActualHelpContent.Case[2];
+			caseFourLabel.Content = ActualHelpContent.Case[3];
 		}
 	}
 }
