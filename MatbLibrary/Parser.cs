@@ -118,6 +118,9 @@ namespace MatbLibrary
         /// <returns>Retruns true if string is valide, false if not</returns>
         public static bool Validate(string input)
         {
+            Regex signs = new Regex(@"(\+|\-)(\+|\-)");
+            var matches = signs.Match(input);
+            if (matches.Success) return false;
             //takhle to pak nebude :)
             double result;
             try

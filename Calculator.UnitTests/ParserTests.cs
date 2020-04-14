@@ -34,13 +34,14 @@ namespace Calculator.UnitTests
             Assert.IsFalse(Parser.Validate("^5"));
             Assert.IsFalse(Parser.Validate("5-^5"));
             Assert.IsFalse(Parser.Validate("(-5+3)*-2!"));
-
+            Assert.IsFalse(Parser.Validate("---5"));
+ 
         }
 
         [TestMethod]
         public void SolveOperations()
         {
-            Assert.AreEqual(Parser.Solve("---5"), -5);
+            
             Assert.AreEqual(Parser.Solve("5!"), 120);
             Assert.AreEqual(Parser.Solve("5+3"), 8);
             Assert.AreEqual(Parser.Solve("5-3"), 2);
