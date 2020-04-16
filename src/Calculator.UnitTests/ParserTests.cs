@@ -36,7 +36,7 @@ namespace Calculator.UnitTests
             Assert.IsFalse(Parser.Validate("5-^5"));
             Assert.IsFalse(Parser.Validate("(-5+3)*-2!"));
             //Assert.IsFalse(Parser.Validate("---5"));
- 
+            Assert.IsFalse(Parser.Validate("5.2!"));
         }
 
         [TestMethod]

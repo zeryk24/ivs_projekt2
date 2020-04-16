@@ -94,17 +94,24 @@ namespace MatbLibrary
         public static double Solve(string input)
         {
             input = ReplaceSigns(input);
-            input = SolveBrackets(input);
-            input = SolveOperation(input, Operations.NLog);
-            input = SolveOperation(input, Operations.Fac);
-            input = SolveOperation(input, Operations.Pow);
-            input = SolveOperation(input, Operations.Sqrt);
-            input = SolveOperation(input, Operations.Mul);
-            input = SolveOperation(input, Operations.Div);
-            input = SolveOperation(input, Operations.Plus);
-            input = SolveOperation(input, Operations.Minus);
+            try
+            {
+                input = SolveBrackets(input);
+                input = SolveOperation(input, Operations.NLog);
+                input = SolveOperation(input, Operations.Fac);
+                input = SolveOperation(input, Operations.Pow);
+                input = SolveOperation(input, Operations.Sqrt);
+                input = SolveOperation(input, Operations.Mul);
+                input = SolveOperation(input, Operations.Div);
+                input = SolveOperation(input, Operations.Plus);
+                input = SolveOperation(input, Operations.Minus);
+            }                
+            catch (Exception)
+            {
+                return double.NaN;
+            }
 
-            input = ReplaceSigns(input);
+    input = ReplaceSigns(input);
 
             double result;
             if (!double.TryParse(input, out result))
