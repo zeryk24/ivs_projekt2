@@ -1,8 +1,0 @@
-C:\Users\Erik\Documents\ivs\proj2\ivs_projekt2\MatbLibrary\bin\Debug\netstandard2.0\MatbLibrary.deps.json
-C:\Users\Erik\Documents\ivs\proj2\ivs_projekt2\MatbLibrary\bin\Debug\netstandard2.0\MatbLibrary.dll
-C:\Users\Erik\Documents\ivs\proj2\ivs_projekt2\MatbLibrary\bin\Debug\netstandard2.0\MatbLibrary.pdb
-C:\Users\Erik\Documents\ivs\proj2\ivs_projekt2\MatbLibrary\obj\Debug\netstandard2.0\MatbLibrary.csprojAssemblyReference.cache
-C:\Users\Erik\Documents\ivs\proj2\ivs_projekt2\MatbLibrary\obj\Debug\netstandard2.0\MatbLibrary.AssemblyInfoInputs.cache
-C:\Users\Erik\Documents\ivs\proj2\ivs_projekt2\MatbLibrary\obj\Debug\netstandard2.0\MatbLibrary.AssemblyInfo.cs
-C:\Users\Erik\Documents\ivs\proj2\ivs_projekt2\MatbLibrary\obj\Debug\netstandard2.0\MatbLibrary.dll
-C:\Users\Erik\Documents\ivs\proj2\ivs_projekt2\MatbLibrary\obj\Debug\netstandard2.0\MatbLibrary.pdb
